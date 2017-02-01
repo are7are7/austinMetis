@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt                           # a basic plotting lib
 
 # simple 2 panel plotting function - to show data and data + true function in separate panels
 def cust_plt_util(data_x,data_y,true_x,true_y):
+
     # setup plot - left panel just data, right panel data + true func
     fig = plt.figure(figsize = (16,5))
     
@@ -39,7 +40,10 @@ def plot_example(data_x,data_y,true_x,true_y):
     plt.axis('off') 
     
 # plot approximation
-def plot_approx(clf,data_x,data_y):
+def plot_approx(clf,data_x,data_y,true_x,true_y):
+    # plot the data and true underlying function
+    plot_example(data_x,data_y,true_x,true_y)
+    
     # make input domain for plot
     s = np.linspace(min(data_x),max(data_x),300)[:, np.newaxis]
     

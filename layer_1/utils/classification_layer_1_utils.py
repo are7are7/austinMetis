@@ -3,7 +3,13 @@ import matplotlib.pyplot as plt                           # a basic plotting lib
 
 
 # simple 2 panel plotting function - to show data and data + true function in separate panels
-def cust_plt_util(data_x,data_y,labels,true_x,true_y):
+def cust_plt_util(data,labels,true_func):
+    # separate coordinates of data and true function
+    data_x = data[:,0]
+    data_y = data[:,1]
+    true_x = true_func[:,0]
+    true_y = true_func[:,1]
+    
     # distinguish labels
     pos_inds = np.argwhere(labels == 1)
     pos_inds = [s[0] for s in pos_inds]
@@ -15,8 +21,9 @@ def cust_plt_util(data_x,data_y,labels,true_x,true_y):
     
     ## plot just data
     ax = fig.add_subplot(1,2,1)
-    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1)
-    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1)
+    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
+    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
+    
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
@@ -24,9 +31,9 @@ def cust_plt_util(data_x,data_y,labels,true_x,true_y):
 
     ## plot data + true func
     ax = fig.add_subplot(1,2,2)
-    ax.plot(true_x,true_y,color = 'k',linestyle = '--',linewidth = 2.5)
-    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1)
-    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1)
+    ax.plot(true_x,true_y,color = 'k',linestyle = '--',linewidth = 4)
+    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
+    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
@@ -34,7 +41,13 @@ def cust_plt_util(data_x,data_y,labels,true_x,true_y):
     
     
 # function - plot data with underlying target function generated in the previous Python cell
-def plot_data(data_x,data_y,labels,sep_x,sep_y):
+def plot_data(data,labels,true_func):
+    # separate coordinates of data and true function
+    data_x = data[:,0]
+    data_y = data[:,1]
+    true_x = true_func[:,0]
+    true_y = true_func[:,1]
+    
     # plot data 
     fig = plt.figure(figsize = (4,4))
     ax = fig.add_subplot(111)
@@ -42,22 +55,27 @@ def plot_data(data_x,data_y,labels,sep_x,sep_y):
     pos_inds = [s[0] for s in pos_inds]
     neg_inds = np.argwhere(labels ==-1)
     neg_inds = [s[0] for s in neg_inds]
-    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1)
-    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1)
+    ax.scatter(data_x[pos_inds],data_y[pos_inds],color = 'salmon',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
+    ax.scatter(data_x[neg_inds],data_y[neg_inds],color = 'cornflowerblue',linewidth = 1,marker = 'o',edgecolor = 'k',s = 60)
     
     # plot target
-    ax.plot(sep_x,sep_y,color = 'k',linestyle = '--',linewidth = 2.5)
+    ax.plot(true_x,true_y,color = 'k',linestyle = '--',linewidth = 4)
+    
     # clean up plot
     ax.set_yticks([],[])
-    ax.set_xlim([-0.1,1.1])
-    ax.set_ylim([-0.1,1.1])
+    ax.set_xlim([min(data_x) - 0.2,max(data_x) + 0.2])
+    ax.set_ylim([min(data_y) - 0.2, max(data_y) + 0.2])
     ax.axis('off') 
     
 # plot approximation
-def plot_approx(clf):
+def plot_approx(clf,data,labels,true_func):
+    # plot data first
+    plot_data(data,labels,true_func)
     
     # plot classification boundary and color regions appropriately
-    r = np.linspace(-2.1,2.1,700)
+    lower_bound = min(data.ravel())
+    upper_bound = max(data.ravel())
+    r = np.linspace(lower_bound - 0.1,upper_bound + 0.1,700)
     s,t = np.meshgrid(r,r)
     s = np.reshape(s,(np.size(s),1))
     t = np.reshape(t,(np.size(t),1))
