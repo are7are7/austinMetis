@@ -1,0 +1,41 @@
+
+Level 2 outline
+
+1.  Motivation for optimization
+   a) adding and subtracting vectors, matrices, and functions (in particular functions with many parameters)
+   b) high level example of regression - using Chesea's method - for illustrating that supervised learing problems have smooth cost functions that need to be minimized to find the best point
+
+2.  Formal study of mathematical optimization
+   a) calculus review - derivatives and stationary points
+   b) going downhill using the gradient
+   c) gradient descent algorithm
+   d) how to set step length
+   e) Newton's method basics
+   f) convex vs nonconvex cost functions
+
+3.  Modeling linear regression
+   a) Back to Chelsea's demo
+   b) Deriving least squares cost function for linear regression
+   c) Gradient descent for linear regression least squares
+
+4. Modeling two-class linear classification
+    a) Fitting a two-class one dimesional two-class dataset with a line
+    b) crack out the sign function, examine the corresponding least squares cost function
+    c) introdue tanh, compare least squares to convex / nonconvex logistic regression
+    d) Support Vector Machines
+    e) probablistic perspective on logistic regression and SVMs*
+    f) Comparing logistic regression and SVMs - hint hint they're basically the same thing
+
+5.  Multiclass classification
+    a) One-versus-All classification
+    b) Multiclass logistic regression
+    c) probablistic perspective*
+    d) Comparing OvA to multiclass logistic - hint hint they're basically the same thing
+
+6.  Nonlinear supervised learning
+    a) use of basis in function approximation
+    b) how regression and classification arise from functino approximation
+    c) the need for cross-validation
+
+
+
