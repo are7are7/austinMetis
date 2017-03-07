@@ -101,8 +101,13 @@ def plot_approx(clf,data,labels,true_func):
   
     unique_labels = np.unique(labels)
     levels = unique_labels
-    plt.contourf(s,t,z,colors = colors[0:len(unique_labels)+1], levels = range(0,len(unique_labels)+1), alpha = 0.2)
+    if len(levels) > 2:
+        
+        plt.contourf(s,t,z,colors = colors[0:len(unique_labels)+1],levels = range(0,len(unique_labels)+1), alpha = 0.2)
+    else:
+        plt.contourf(s,t,z,colors = colors[0:len(unique_labels)+1],alpha = 0.2) #levels = range(0,len(unique_labels)+1), alpha = 0.2)
 
+    
     # show the classification boundary if it exists
     if len(np.unique(z)) > 1:
         plt.contour(s,t,z,colors = 'k',linewidths = 2.5, levels = unique_labels)
