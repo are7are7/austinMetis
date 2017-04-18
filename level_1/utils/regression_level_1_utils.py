@@ -3,17 +3,14 @@ import matplotlib.pyplot as plt                           # a basic plotting lib
 
 
 # simple 2 panel plotting function - to show data and data + true function in separate panels
-def cust_plt_util(data_x,data_y,true_x,true_y,color):
+def cust_plt_util(data_x,data_y,true_x,true_y,color='b', linewidth = 2.5):
 
     # setup plot - left panel just data, right panel data + true func
     fig = plt.figure(figsize = (16,5))
     
-    # allow to add
-    clr = color
-    
     ## plot just data
     ax = fig.add_subplot(1,2,1)
-    ax.scatter(data_x,data_y,facecolor = clr,edgecolor = 'k',linewidth = 2.5)
+    ax.scatter(data_x,data_y,facecolor = color,edgecolor = color,linewidth = linewidth)
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
@@ -22,19 +19,19 @@ def cust_plt_util(data_x,data_y,true_x,true_y,color):
     ## plot data + true func
     ax = fig.add_subplot(1,2,2)
     ax.plot(true_x,true_y,'r--',linewidth = 2.5)
-    ax.scatter(data_x,data_y,facecolor = clr,edgecolor = 'k',linewidth = 2.5)
+    ax.scatter(data_x,data_y,facecolor = color,edgecolor = color,linewidth = linewidth)
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
     ax.axis('off') 
     
 # simple plotting function
-def plot_example(data_x,data_y,true_x,true_y):
+def plot_example(data_x,data_y,true_x,true_y, color='b', linewidth = 2.5):
     # plot underlying data-generating function
     plt.plot(true_x,true_y,'r--',linewidth = 2.5)
 
     # plot data 
-    plt.scatter(data_x,data_y,facecolor = 'b',edgecolor = 'k',linewidth = 2.5)
+    plt.scatter(data_x,data_y,facecolor = color,edgecolor = color,linewidth = linewidth)
 
     # clean up the plot
     plt.xlim(min(data_x)-0.1,max(data_x)+0.1)
@@ -43,7 +40,7 @@ def plot_example(data_x,data_y,true_x,true_y):
     plt.axis('off') 
     
 # plot approximation
-def plot_approx(clf,data_x,data_y,true_x,true_y):
+def plot_approx(clf,data_x,data_y,true_x,true_y,):
     # plot the data and true underlying function
     plot_example(data_x,data_y,true_x,true_y)
     
@@ -54,5 +51,5 @@ def plot_approx(clf,data_x,data_y,true_x,true_y):
     t = clf.predict(s)
 
     # plot regressor
-    plt.plot(s,t,linewidth = 3,color = 'b')
+    plt.plot(s,t,linewidth = 3,color)
     plt.ylim(min(min(data_y)-0.1,min(t)-0.1),max(max(data_y)+0.1,max(t)+0.1)) 
