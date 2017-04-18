@@ -3,14 +3,17 @@ import matplotlib.pyplot as plt                           # a basic plotting lib
 
 
 # simple 2 panel plotting function - to show data and data + true function in separate panels
-def cust_plt_util(data_x,data_y,true_x,true_y):
+def cust_plt_util(data_x,data_y,true_x,true_y,color):
 
     # setup plot - left panel just data, right panel data + true func
     fig = plt.figure(figsize = (16,5))
     
+    # allow to add
+    clr = color
+    
     ## plot just data
     ax = fig.add_subplot(1,2,1)
-    ax.scatter(data_x,data_y,facecolor = 'b',edgecolor = 'k',linewidth = 2.5)
+    ax.scatter(data_x,data_y,facecolor = clr,edgecolor = 'k',linewidth = 2.5)
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
@@ -19,7 +22,7 @@ def cust_plt_util(data_x,data_y,true_x,true_y):
     ## plot data + true func
     ax = fig.add_subplot(1,2,2)
     ax.plot(true_x,true_y,'r--',linewidth = 2.5)
-    ax.scatter(data_x,data_y,facecolor = 'b',edgecolor = 'k',linewidth = 2.5)
+    ax.scatter(data_x,data_y,facecolor = clr,edgecolor = 'k',linewidth = 2.5)
     ax.set_xlim(min(data_x)-0.1,max(data_x)+0.1)
     ax.set_ylim(min(data_y)-0.1,max(data_y)+0.1)
     ax.set_yticks([],[])
