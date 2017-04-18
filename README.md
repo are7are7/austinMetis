@@ -1,2 +1,3 @@
-# chi17_ml1
-Chicago - Machine Learning - Cohort 1 repository
+# Machine Learning: Algorithms and Applications
+
+This repository hosts the curriculum for the class
